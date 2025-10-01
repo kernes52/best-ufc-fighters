@@ -46,3 +46,5 @@ Add ERD image here once you export from draw.io:
 
 ## Versioning
 - All endpoints start with `/api/v1`.  
+---
+_This is a student project for UFC Fighters site._
