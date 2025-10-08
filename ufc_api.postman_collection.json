@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "UFC API v1",
+    "_postman_id": "92f60564-e867-4fff-b6b9-2b5ac6badb9c",
+    "description": "CRUD endpoints for Fighters, Weight Classes, Events, and Bouts. Uses APIViews with Django REST Framework.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Fighters",
+      "item": [
+        {
+          "name": "List fighters",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/fighters/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function(){ pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create fighter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Demo Fighter\",\n  \"country\": \"USA\",\n  \"wins\": 0,\n  \"losses\": 0,\n  \"weight_class\": 1\n}"
+            },
+            "url": "{{base_url}}/fighters/"
+          }
+        },
+        {
+          "name": "Get fighter by id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/fighters/1/"
+          }
+        },
+        {
+          "name": "Update fighter (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"wins\": 1\n}"
+            },
+            "url": "{{base_url}}/fighters/1/"
+          }
+        },
+        {
+          "name": "Delete fighter",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/fighters/1/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Weight Classes",
+      "item": [
+        {
+          "name": "List weight classes",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/weight-classes/"
+          }
+        },
+        {
+          "name": "Create weight class",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"LW\",\n  \"name\": \"Lightweight\",\n  \"min_weight\": 66.0,\n  \"max_weight\": 70.0\n}"
+            },
+            "url": "{{base_url}}/weight-classes/"
+          }
+        },
+        {
+          "name": "Get weight class by code",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/weight-classes/LW/"
+          }
+        },
+        {
+          "name": "Update weight class by code (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Lightweight (updated)\"\n}"
+            },
+            "url": "{{base_url}}/weight-classes/LW/"
+          }
+        },
+        {
+          "name": "Delete weight class by code",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/weight-classes/LW/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List events",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/events/"
+          }
+        },
+        {
+          "name": "Create event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"UFC 300: Pereira vs. Hill\",\n  \"date\": \"2024-04-13\",\n  \"city\": \"Las Vegas\",\n  \"country\": \"USA\"\n}"
+            },
+            "url": "{{base_url}}/events/"
+          }
+        },
+        {
+          "name": "Get event by id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/events/1/"
+          }
+        },
+        {
+          "name": "Update event (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"city\": \"Las Vegas, NV\"\n}"
+            },
+            "url": "{{base_url}}/events/1/"
+          }
+        },
+        {
+          "name": "Delete event",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/events/1/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bouts",
+      "item": [
+        {
+          "name": "List bouts",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/bouts/"
+          }
+        },
+        {
+          "name": "List bouts by fighter_id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/bouts/?fighter_id=1"
+          }
+        },
+        {
+          "name": "Create bout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": 1,\n  \"fighter_red\": 1,\n  \"fighter_blue\": 2,\n  \"result\": \"red\",\n  \"method\": \"KO\",\n  \"round\": 1,\n  \"time\": \"03:14\"\n}"
+            },
+            "url": "{{base_url}}/bouts/"
+          }
+        },
+        {
+          "name": "Get bout by id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/bouts/1/"
+          }
+        },
+        {
+          "name": "Update bout (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method\": \"Decision\"\n}"
+            },
+            "url": "{{base_url}}/bouts/1/"
+          }
+        },
+        {
+          "name": "Delete bout",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/bouts/1/"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api/v1"
+    }
+  ]
+}
